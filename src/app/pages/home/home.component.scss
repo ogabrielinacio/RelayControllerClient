@@ -1,0 +1,134 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100%;
+  padding: 40px 20px;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+
+  .top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px 0;
+  
+    .profile-button,
+    .logout-button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+  
+    .profile-button {
+      background-color: #4a90e2;
+  
+      &:hover {
+        background-color: #3a78c2;
+      }
+    }
+  
+    .logout-button {
+      background-color: #e74c3c;
+  
+      &:hover {
+        background-color: #c0392b;
+      }
+    }
+  }
+  
+
+  h2 {
+    font-size: 2rem;
+    color: #ff9966;
+    margin-bottom: 20px;
+  }
+
+  .add-button {
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 30px;
+
+    &:hover {
+      background-color: #3a78c2;
+    }
+  }
+
+  .boards-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .board-card {
+    background: #1e1e2f;
+    padding: 1rem;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .info {
+      cursor: pointer;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 1.2rem;
+      line-height: 1.6;
+
+      p {
+        margin: 0;
+      }
+
+      strong {
+        font-size: 1.3rem;
+      }
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+
+      .action-btn {
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 1.2rem;
+        padding: 0.4rem 0.6rem;
+        cursor: pointer;
+
+        &.edit {
+          background-color: #3498db;
+        }
+
+        &.invite {
+          background-color: #27ae60;
+        }
+
+        &.delete {
+          background-color: #e74c3c;
+        }
+      }
+    }
+  }
+}

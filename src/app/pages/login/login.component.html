@@ -1,0 +1,20 @@
+<div class="login-container">
+  <div class="login-box">
+    <h2>Login</h2>
+
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <input type="email" formControlName="email" placeholder="Email" />
+      <input type="password" formControlName="password" placeholder="Senha" />
+      <button type="submit" [disabled]="form.invalid">Entrar</button>
+    </form>
+
+    @if (error) {
+    <p class="error">{{ error }}</p>
+    }
+
+    <p class="register-link">
+      Não tem uma conta?
+      <a routerLink="/register">Crie uma aqui</a>
+    </p>
+  </div>
+</div>

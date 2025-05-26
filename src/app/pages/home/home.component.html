@@ -1,0 +1,48 @@
+<div class="home-container">
+  <div class="top-bar">
+    <button class="profile-button" [routerLink]="['/profile']">👤 Perfil</button>
+    <button class="logout-button" (click)="logout()">Sair</button>
+  </div>
+
+  <h2>Suas Placas</h2>
+
+  <button class="add-button" (click)="showModal = true">+ Adicionar Placa</button>
+  @if(showModal){
+  <app-add-device (added)="ngOnInit()" (close)="showModal = false" />
+  }
+
+  <div class="boards-list">
+    @for (board of boards; track board.relayControllerBoardId) {
+      <div class="board-card">
+        <div class="info" [routerLink]="['/device', board.relayControllerBoardId]">
+          <p>
+            <strong>Nome:</strong> {{ board.customName || board.relayControllerBoardId }}<br />
+            <strong>Relação:</strong> {{ board.role | roleTranslate}}
+          </p>
+        </div>
+
+        <div class="actions">
+          <button class="action-btn edit" (click)="startRename(board)">✏️</button>
+          @if (board.role === 'Owner') {
+          <button class="action-btn invite" (click)="startInvite(board)">➕</button>
+          }
+          <button class="action-btn delete" (click)="startRemove(board)">🗑️</button>
+        </div>
+      </div>
+
+      @if (renameBoardId === board.relayControllerBoardId) {
+      <app-edit-nickname [boardId]="renameBoardId!" [currentName]="renameCurrentName" (renamed)="handleRename()"
+        (close)="renameBoardId = null" />
+      }
+    }
+  </div>
+
+  @if(confirmBoardId){
+  <app-confirm-dialog [message]="'Tem certeza que deseja remover essa placa?'" (confirmed)="handleRemoveConfirmed()"
+    (canceled)="cancelRemove()" />
+  }
+  @if(inviteBoardId){
+  <app-invite-user [boardId]="inviteBoardId" (close)="inviteBoardId = null" />
+  }
+
+</div>

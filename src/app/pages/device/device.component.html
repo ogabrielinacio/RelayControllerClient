@@ -1,0 +1,35 @@
+@if (device){
+<div class="device-container">
+    <h2>Detalhes da Placa</h2>
+
+    <p class="status-text">
+        <strong>Estado:</strong> {{ device.isEnable ? 'Ligado' : 'Desligado' }}
+    </p>
+
+    <button class="toggle-button" (click)="toggleEnable()">
+        {{ device.isEnable ? 'Desligar' : 'Ligar' }}
+    </button>
+    <app-commands [controllerId]="device.id" [enable]="device.isEnable"
+        (actionCompleted)="fetchNewInfo(device.id)"></app-commands>
+    @if (device?.routines?.length) {
+    <div class="routines-container">
+        <h3>Rotinas</h3>
+
+        <div class="routines-grid">
+            @for (routine of device.routines; track routine.id) {
+            <div class="routine-card">
+                <h4>Rotina #{{ $index + 1 }}</h4>
+                <p><strong>Ligar às:</strong> {{ routine.startTime || 'Não definido' }}</p>
+                <p><strong>Desligar às:</strong> {{ routine.endTime || 'Não definido' }}</p>
+                <p><strong>Repetir:</strong> {{ routine.repeat | repeatText }}</p>
+                <p><strong>Dia da Semana:</strong> {{ routine.dayOfWeek != null ? (routine.dayOfWeek | dayOfWeekText) :
+                    'Não definido' }}</p>
+                <p><strong>Dia do Mês:</strong> {{ routine.dayOfMonth ?? 'Não definido' }}</p>
+            </div>
+            }
+        </div>
+    </div>
+    }
+    <button routerLink="/home">Voltar</button>
+</div>
+}

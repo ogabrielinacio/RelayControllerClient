@@ -1,0 +1,16 @@
+<div class="modal-backdrop">
+    <div class="modal">
+        <h3>Renomear Placa</h3>
+
+        <label>Novo nome:</label>
+        <input type="text" [(ngModel)]="newName" (input)="error = null" placeholder="Novo nome" />
+        @if(error){
+            <small class="error">{{ error }}</small>
+        }
+
+        <div class="actions">
+            <button (click)="save()" [disabled]="!isValid()">Salvar</button>
+            <button (click)="close.emit()">Cancelar</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="commands-container">
+  <h3>Programar Timer</h3>
+
+  <div class="field">
+    <label for="startTime">Ligar em:</label>
+    <input type="datetime-local" id="startTime" [value]="startTime | brazilTime" (change)="updateStartTime($event)"
+      [min]="minDateTime" />
+  </div>
+
+  <div class="field">
+    <label for="endTime">Desligar em:</label>
+    <input type="datetime-local" id="endTime" [value]="endTime" (change)="updateEndTime($event)" [min]="minDateTime" />
+  </div>
+
+  <div class="field">
+    <label for="repeat">Repetir:</label>
+    <select id="repeat" [value]="repeat" (change)="updateRepeat($event)">
+      <option [value]="0">Não Repetir</option>
+      <option [value]="1">Diariamente</option>
+      <option [value]="2">Semanalmente</option>
+      <option [value]="3">Mensalmente</option>
+    </select>
+  </div>
+
+  <div class="actions">
+    <button class="update-btn" (click)="sendUpdateRequest()">
+      Atualizar
+    </button>
+  </div>
+</div>

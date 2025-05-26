@@ -1,0 +1,22 @@
+<div class="modal-backdrop">
+    <div class="modal">
+        <h3>Convidar Usuário</h3>
+
+        <label>Email:</label>
+        <input [(ngModel)]="email" type="email" placeholder="Email do usuário" />
+
+        <label>Relação:</label>
+        <select [(ngModel)]="roleId">
+            <option [value]="2">Gerente</option>
+        </select>
+
+        @if (error) {
+            <p class="error">{{ error }}</p>
+        }
+
+        <div class="actions">
+            <button (click)="sendInvite()">Convidar</button>
+            <button (click)="close.emit()">Cancelar</button>
+        </div>
+    </div>
+</div>

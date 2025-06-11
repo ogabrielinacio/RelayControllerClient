@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { RoutineRequest } from './../../models/RelayController/Requests/routine-request.model';
+import { Component, EventEmitter, Input, NO_ERRORS_SCHEMA, Output } from '@angular/core';
 import { RelayControllerApiService } from '../../services/RelayController/relay-controller-api.service';
 import { BrazilTimePipe } from '../../pipes/brazil-time.pipe';
 import { Repeat } from '../../enums/repeat.enum';
@@ -48,23 +49,22 @@ export class CommandsComponent {
   }
 
   sendUpdateRequest(): void {
-    // const payload: UpdateRelayController = {
-    //   id: this.controllerId,
-    //   isActive: true,
-    //   isEnable: true,
-    //   startTime: this.startTime || undefined,
-    //   endTime: this.endTime || undefined,
-    //   repeat: this.repeat,
-    // };
+    const newRoutine : RoutineRequest = {
+      id: this.controllerId,
+      startTime: this.startTime ,
+      repeat: this.repeat,
+    };
 
-    // this.apiService.updateController(payload).subscribe({
-    //   next: (response) => {
-    //     console.log('Controller atualizado com sucesso:', response);
-    //     this.actionCompleted.emit();
-    //   },
-    //   error: (error) => {
-    //     console.error('Erro ao atualizar o controller:', error);
-    //   },
-    // });
+    if (this.endTime) {
+      newRoutine.endTime = this.endTime;
+    }
+
+    this.apiService.AddRoutine(newRoutine).subscribe({
+      next: (response) => {
+      },
+      error: (error) => {
+        console.error('Erro ao atualizar o controller:', error);
+      },
+    });
   }
 }

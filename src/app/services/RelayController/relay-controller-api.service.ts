@@ -51,7 +51,7 @@ export class RelayControllerApiService extends BaseApiService {
 
   AddRoutine(newRoutine: RoutineRequest): Observable<ApiResponse> {
     this.loadingService.show();
-    return this.http.put<any>(`${this.apiUrl}/add-routine`, newRoutine).pipe(
+    return this.http.post<any>(`${this.apiUrl}/add-routine`, newRoutine).pipe(
       finalize(() => {
         this.loadingService.hide();
       })

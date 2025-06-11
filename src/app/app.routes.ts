@@ -4,6 +4,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ConfirmEmailComponent } from './pages/confirm-email/confirm-email.component';
+import { SendRecoveryPasswordComponent } from './pages/send-recovery-password/send-recovery-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +24,14 @@ export const routes: Routes = [
   {
     path: 'confirm-email',
     component: ConfirmEmailComponent,
+  },
+  {
+    path: 'send-recovery-password',
+    component: SendRecoveryPasswordComponent,
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];

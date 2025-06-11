@@ -59,6 +59,23 @@ export class AuthService extends BaseApiService {
     );
   }
 
+  sendRecoveryPasswordEmail(email: string): Observable<ApiResponse> {
+    this.loadingService.show();
+    return this.http.post<any>(`${this.apiUrl}/send-recovery-password?email=${email}`, null).pipe(
+      finalize(() => this.loadingService.hide())
+    );
+  }
+
+  ConfirmResetPassword(token: string,newPassword: string): Observable<ApiResponse> {
+    const headers = { Authorization: `Bearer ${token}` };
+    this.loadingService.show();
+    return this.http.post<any>(`${this.apiUrl}/reset-password?newPassword=${newPassword}`, null, {headers}).pipe(
+      finalize(() => this.loadingService.hide())
+    );
+  }
+
+
+
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('accessToken');

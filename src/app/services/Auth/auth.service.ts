@@ -5,7 +5,7 @@ import { LoadingService } from '../Loading/loading.service';
 import { BaseApiService } from '../base-api.service';
 import { RegisterRequest } from '../../models/User/Requests/register-request.model';
 import { LoginRequest } from '../../models/User/Requests/login-request.model';
-import { ApiResponseWithData } from '../../models/api-response';
+import { ApiResponse, ApiResponseWithData } from '../../models/api-response';
 import { RegisterResponse } from '../../models/User/Responses/register-response.model';
 import { LoginResponse } from '../../models/User/Responses/login-response.model';
 
@@ -43,6 +43,22 @@ export class AuthService extends BaseApiService {
   logout(): void {
     localStorage.removeItem('accessToken');
   }
+
+  sendConfirmEmail(email: string): Observable<ApiResponse> {
+    this.loadingService.show();
+    return this.http.post<any>(`${this.apiUrl}/send-confirm-email?email=${email}`, null).pipe(
+      finalize(() => this.loadingService.hide())
+    );
+  }
+
+  confirmEmail(token: string): Observable<ApiResponse> {
+    const headers = { Authorization: `Bearer ${token}` };
+    this.loadingService.show();
+    return this.http.post<any>(`${this.apiUrl}/confirm-email`, null, {headers}).pipe(
+      finalize(() => this.loadingService.hide())
+    );
+  }
+
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('accessToken');

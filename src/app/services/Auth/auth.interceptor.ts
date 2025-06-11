@@ -18,7 +18,12 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = localStorage.getItem('accessToken');
 
     const isPublic =
-      req.url.includes('/user/login') || req.url.includes('/user/register');
+      req.url.includes('/user/login') 
+      || req.url.includes('/user/register')
+      || req.url.includes('/user/send-confirm-email')
+      || req.url.includes('/user/confirm-email')
+      || req.url.includes('/user/send-recovery-password')
+      || req.url.includes('/user/reset-password');
 
     if (token && !isPublic) {
       const cloned = req.clone({

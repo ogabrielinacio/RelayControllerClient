@@ -1,0 +1,24 @@
+<div class="confirm-container">
+    <h2>Confirmação de E-mail</h2>
+
+    <div class="message">
+        {{ message }}
+    </div>
+
+    @if(showButton){
+        <div class="resend-form">
+            <input
+            type="email"
+            [(ngModel)]="email"
+            placeholder="Digite seu e-mail"
+            class="email-input"
+          />
+        </div>
+        @if (error) {
+            <p class="error">{{ error }}</p>
+        } 
+        <button class="resend-button" (click)="resendEmail()">
+            Reenviar E-mail de Confirmação
+        </button>
+    }
+</div>

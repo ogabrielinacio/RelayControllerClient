@@ -48,7 +48,9 @@ export class LoginComponent {
       },
       error: (err) => {
         if (err.status === 403) {
-          this.error =  'Email ou senha incorretos.';
+          this.error = 'Email ou senha incorretos.';
+        } else if (err.status === 401) {
+          this.error = 'Email não confirmado, por favor verifique sua caixa de entrada';
         } else if (err.status === 0) {
           this.error = 'Servidor indisponível. Tente novamente mais tarde.';
         } else {

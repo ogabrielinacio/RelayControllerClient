@@ -48,15 +48,23 @@ export class RegisterComponent {
     this.authService.register(request).subscribe({
       next: (res) => {
         if (res.success) {
+          this.authService.sendConfirmEmail(request.email).subscribe({
+            error: (err) => {
+              if (err.status === 404) {
+                this.error =
+                  'Ao enviar email de confirmação; Usuário com este email não existe';
+              }
+            },
+          });
           this.router.navigate(['/login']);
         } else {
           this.error = res.message || 'Erro ao registrar.';
         }
       },
       error: (err) => {
-        if(err.status === 409){
+        if (err.status === 409) {
           this.error = 'Usuário com este email já existe';
-        }else {
+        } else {
           this.error = 'Erro Inesperado.';
         }
       },

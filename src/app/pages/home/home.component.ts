@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
 
   logout(): void {
     this.authService.logout;
+    this.router.navigate(['/login']);
   }
 
   startRemove(board: any): void {
@@ -57,10 +58,10 @@ export class HomeComponent implements OnInit {
   handleRemoveConfirmed(): void {
     if (!this.confirmBoardId) return;
   
-    // this.userBoardService.removeBoard(this.confirmBoardId).subscribe(() => {
-    //   this.confirmBoardId = null;
-    //   this.ngOnInit();
-    // });
+    this.userBoardService.deleteDevice(this.confirmBoardId).subscribe(() => {
+      this.confirmBoardId = null;
+      this.ngOnInit();
+    });
   }
   
   cancelRemove(): void {

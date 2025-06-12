@@ -2,10 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, finalize, of } from 'rxjs';
 import { LoadingService } from '../Loading/loading.service';
-import { ApiResponseWithData } from '../../models/api-response';
+import { ApiResponse, ApiResponseWithData } from '../../models/api-response';
 import { GetAllByUserResponse } from '../../models/UserBoard/Responses/get-all-response.model';
 import { AddBoardRequest } from '../../models/UserBoard/Requests/add-board-request.model';
 import { AddUserToDeviceRequest } from '../../models/UserBoard/Requests/add-user-to-device-request.model';
+import { UpdateDeviceNickname } from '../../models/UserBoard/Requests/update-device-nickname-request.model';
+import { DeleteUserFromDevice } from '../../models/UserBoard/Requests/delete-user-from-device-request.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserBoardService {
@@ -28,10 +30,18 @@ export class UserBoardService {
     return this.http.post<any>(`${this.apiUrl}/add-user`, request);
   }
 
-  updateDeviceName(boardId: string, newCustomName: string): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/update`, {
-      boardId,
-      newCustomName,
+  updateDeviceNickname(request: UpdateDeviceNickname): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/rename`, request);
+  }
+
+  deleteDevice(boardId: string): Observable<ApiResponse> {
+    return this.http.delete<any>(`${this.apiUrl}/remove/${boardId}`);
+  }
+  
+  deleteUserFromDevice(request: DeleteUserFromDevice): Observable<ApiResponse> {
+    return this.http.delete<any>(`${this.apiUrl}/delete-user-from-device`, {
+      body: request
     });
   }
+
 }

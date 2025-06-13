@@ -1,0 +1,9 @@
+<div class="modal">
+    <h3>Alterar E-mail</h3>
+    <input [(ngModel)]="newEmail" placeholder="Novo e-mail" type="email" />
+
+    <div class="modal-actions">
+      <button (click)="submit()" [disabled]="!newEmail.trim()">Salvar</button>
+      <button class="cancel" (click)="close.emit()">Cancelar</button>
+    </div>
+  </div>

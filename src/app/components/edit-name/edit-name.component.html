@@ -1,0 +1,9 @@
+<div class="modal">
+    <h3>Alterar Nome</h3>
+    <input [(ngModel)]="newName" placeholder="Novo nome" />
+
+    <div class="modal-actions">
+      <button (click)="submit()" [disabled]="!newName.trim()">Salvar</button>
+      <button class="cancel" (click)="close.emit()">Cancelar</button>
+    </div>
+  </div>

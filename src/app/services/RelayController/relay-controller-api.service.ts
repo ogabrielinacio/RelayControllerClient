@@ -57,4 +57,14 @@ export class RelayControllerApiService extends BaseApiService {
       })
     );
   }
+
+  RemoveRoutine(request: { boardId: string; routineId: string }): Observable<ApiResponse> {
+    this.loadingService.show();
+    return this.http.delete<ApiResponse>(`${this.apiUrl}/delete-routine`, {
+      body: request
+    }).pipe(
+      finalize(() => this.loadingService.hide())
+    );
+  }
+
 }

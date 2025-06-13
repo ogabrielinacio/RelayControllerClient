@@ -52,12 +52,28 @@ export class DeviceComponent {
         const data = res?.data;
         if (data) {
           this.device = data;
-          console.log('Info atualizada do controller recebida com sucesso.');
         }
       },
       error: (err) => {
         console.error('Erro ao buscar info do controller:', err);
       },
+    });
+  }
+
+  deleteRoutine(routineId: string): void {
+    if (!this.device?.id) return;
+    if (!confirm('Tem certeza que deseja remover esta rotina?')) return;
+  
+    this.relayControllerService.RemoveRoutine({
+      boardId: this.device.id,
+      routineId: routineId,
+    }).subscribe({
+      next: () => {
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.error('Erro ao remover rotina:', err);
+      }
     });
   }
 }

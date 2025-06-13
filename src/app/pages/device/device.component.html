@@ -25,6 +25,7 @@
                 <p><strong>Dia da Semana:</strong> {{ routine.dayOfWeek != null ? (routine.dayOfWeek | dayOfWeekText) :
                     'Não definido' }}</p>
                 <p><strong>Dia do Mês:</strong> {{ routine.dayOfMonth ?? 'Não definido' }}</p>
+                <button class="delete-btn" (click)="deleteRoutine(routine.id)">🗑️ Remover</button>
             </div>
             }
         </div>

@@ -32,14 +32,14 @@ export class CommandsComponent {
   updateStartTime(event: Event): void {
     const input = event.target as HTMLInputElement;
     const localDate = new Date(input.value);
-    localDate.setHours(localDate.getHours() - 3);
+    localDate.setHours(localDate.getHours());
     this.startTime = localDate.toISOString();
   }
 
   updateEndTime(event: Event): void {
     const input = event.target as HTMLInputElement;
     const localDate = new Date(input.value);
-    localDate.setHours(localDate.getHours() - 3);
+    localDate.setHours(localDate.getHours());
     this.endTime = localDate.toISOString();
   }
 

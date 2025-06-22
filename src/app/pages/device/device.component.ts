@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { RepeatTextPipe } from '../../pipes/repeat-text.pipe';
 import { DayOfWeekTextPipe } from '../../pipes/day-of-week-text.pipe';
 import { CommandsComponent } from '../../components/commands/commands.component';
+import { BrazilTimePipe } from "../../pipes/brazil-time.pipe";
 
 @Component({
   selector: 'app-device',
@@ -13,7 +14,8 @@ import { CommandsComponent } from '../../components/commands/commands.component'
     DayOfWeekTextPipe,
     CommandsComponent,
     RouterLink,
-  ],
+    BrazilTimePipe
+],
   templateUrl: './device.component.html',
   styleUrl: './device.component.scss',
 })

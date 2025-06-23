@@ -61,6 +61,7 @@ export class CommandsComponent {
 
     this.apiService.AddRoutine(newRoutine).subscribe({
       next: (response) => {
+        this.actionCompleted.emit();
       },
       error: (error) => {
         console.error('Erro ao atualizar o controller:', error);

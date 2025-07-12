@@ -4,7 +4,6 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { RepeatTextPipe } from '../../pipes/repeat-text.pipe';
 import { DayOfWeekTextPipe } from '../../pipes/day-of-week-text.pipe';
 import { CommandsComponent } from '../../components/commands/commands.component';
-import { BrazilTimePipe } from "../../pipes/brazil-time.pipe";
 
 @Component({
   selector: 'app-device',
@@ -14,8 +13,7 @@ import { BrazilTimePipe } from "../../pipes/brazil-time.pipe";
     DayOfWeekTextPipe,
     CommandsComponent,
     RouterLink,
-    BrazilTimePipe
-],
+  ],
   templateUrl: './device.component.html',
   styleUrl: './device.component.scss',
 })
@@ -31,6 +29,29 @@ export class DeviceComponent {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.fetchNewInfo(id);
+    }
+  }
+
+  toggleMode() {
+    if (!this.device?.id) return;
+    if (this.device.mode === 1) {
+      this.relayControllerService.SetAutoMode(this.device.id).subscribe({
+        next: () => {
+          this.ngOnInit();
+        },
+        error: (err) => {
+          console.error('Erro ao setar em auto mode:', err);
+        },
+      });
+    } else {
+      this.relayControllerService.SetManualMode(this.device.id).subscribe({
+        next: () => {
+          this.ngOnInit();
+        },
+        error: (err) => {
+          console.error('Erro ao setar em manual mode', err);
+        },
+      });
     }
   }
 
@@ -65,17 +86,46 @@ export class DeviceComponent {
   deleteRoutine(routineId: string): void {
     if (!this.device?.id) return;
     if (!confirm('Tem certeza que deseja remover esta rotina?')) return;
-  
-    this.relayControllerService.RemoveRoutine({
-      boardId: this.device.id,
-      routineId: routineId,
-    }).subscribe({
-      next: () => {
-        this.ngOnInit();
-      },
-      error: (err) => {
-        console.error('Erro ao remover rotina:', err);
-      }
-    });
+
+    this.relayControllerService
+      .RemoveRoutine({
+        boardId: this.device.id,
+        routineId: routineId,
+      })
+      .subscribe({
+        next: () => {
+          this.ngOnInit();
+        },
+        error: (err) => {
+          console.error('Erro ao remover rotina:', err);
+        },
+      });
+  }
+
+  toggleRoutine(routineId: string, isActive: boolean) {
+    if (!this.device?.id) return;
+    if (isActive) {
+      this.relayControllerService
+        .DeactivateRoutine(this.device.id, routineId)
+        .subscribe({
+          next: () => {
+            this.ngOnInit();
+          },
+          error: (err) => {
+            console.error('error ao desativar rotina:', err);
+          },
+        });
+    } else {
+      this.relayControllerService
+        .ActivateRoutine(this.device.id, routineId)
+        .subscribe({
+          next: () => {
+            this.ngOnInit();
+          },
+          error: (err) => {
+            console.error('error ao desativar rotina:', err);
+          },
+        });
+    }
   }
 }

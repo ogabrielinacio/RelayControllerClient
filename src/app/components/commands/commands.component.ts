@@ -1,13 +1,11 @@
 import { RoutineRequest } from './../../models/RelayController/Requests/routine-request.model';
 import { Component, EventEmitter, Input, NO_ERRORS_SCHEMA, Output } from '@angular/core';
 import { RelayControllerApiService } from '../../services/RelayController/relay-controller-api.service';
-import { BrazilTimePipe } from '../../pipes/brazil-time.pipe';
 import { Repeat } from '../../enums/repeat.enum';
 
 @Component({
   selector: 'app-commands',
   standalone: true,
-  imports: [BrazilTimePipe],
   templateUrl: './commands.component.html',
   styleUrl: './commands.component.scss',
 })

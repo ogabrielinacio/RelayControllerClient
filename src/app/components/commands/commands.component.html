@@ -3,13 +3,13 @@
 
   <div class="field">
     <label for="startTime">Ligar em:</label>
-    <input type="datetime-local" id="startTime" [value]="startTime | brazilTime" (change)="updateStartTime($event)"
+    <input type="datetime-local" id="startTime" [value]="startTime" (change)="updateStartTime($event)"
       [min]="minDateTime" />
   </div>
 
   <div class="field">
     <label for="endTime">Desligar em:</label>
-    <input type="datetime-local" id="endTime" [value]="endTime | brazilTime" (change)="updateEndTime($event)" [min]="minDateTime" />
+    <input type="datetime-local" id="endTime" [value]="endTime " (change)="updateEndTime($event)" [min]="minDateTime" />
 
   </div>
 

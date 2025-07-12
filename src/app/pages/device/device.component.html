@@ -2,13 +2,25 @@
 <div class="device-container">
     <h2>Detalhes da Placa</h2>
 
+    <div class="mode-toggle-wrapper">
+        <span class="mode-side-label">Manual</span>
+        <label class="switch">
+          <input type="checkbox" [checked]="device.mode === 0" (change)="toggleMode()">
+          <span class="slider"></span>
+        </label>
+        <span class="mode-side-label">Automático</span>
+      </div>
+      
+
     <p class="status-text">
         <strong>Estado:</strong> {{ device.isEnable ? 'Ligado' : 'Desligado' }}
     </p>
 
-    <button class="toggle-button" (click)="toggleEnable()">
-        {{ device.isEnable ? 'Desligar' : 'Ligar' }}
-    </button>
+    @if(device.mode === 1){
+        <button class="toggle-button" (click)="toggleEnable()">
+            {{ device.isEnable ? 'Desligar' : 'Ligar' }}
+        </button>
+    }
     <app-commands [controllerId]="device.id" [enable]="device.isEnable"
         (actionCompleted)="fetchNewInfo(device.id)"></app-commands>
     @if (device?.routines?.length) {
@@ -18,14 +30,25 @@
         <div class="routines-grid">
             @for (routine of device.routines; track routine.id) {
             <div class="routine-card">
-                <h4>Rotina #{{ $index + 1 }}</h4>
-                <p><strong>Ligar às:</strong> {{ (routine.startTime | brazilTime) || 'Não definido' }}</p>
-                <p><strong>Desligar às:</strong> {{ (routine.endTime | brazilTime ) || 'Não definido' }}</p>
+                <div class="routine-header">
+                    <h4>Rotina #{{ $index + 1 }}</h4>
+                    <div class="routine-toggle-wrapper">
+                      <label class="switch small">
+                        <input type="checkbox" [checked]="routine.isActive" (change)="toggleRoutine(routine.id, routine.isActive)">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                  
+                <p><strong>Ligar às:</strong> {{ routine.startTime || 'Não definido' }}</p>
+                <p><strong>Desligar às:</strong> {{ routine.endTime  || 'Não definido' }}</p>
                 <p><strong>Repetir:</strong> {{ routine.repeat | repeatText }}</p>
                 <p><strong>Dia da Semana:</strong> {{ routine.dayOfWeek != null ? (routine.dayOfWeek | dayOfWeekText) :
                     'Não definido' }}</p>
                 <p><strong>Dia do Mês:</strong> {{ routine.dayOfMonth ?? 'Não definido' }}</p>
                 <button class="delete-btn" (click)="deleteRoutine(routine.id)">🗑️ Remover</button>
+              
+                  
             </div>
             }
         </div>

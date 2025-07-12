@@ -29,16 +29,12 @@ export class CommandsComponent {
 
   updateStartTime(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const localDate = new Date(input.value);
-    localDate.setHours(localDate.getHours());
-    this.startTime = localDate.toISOString();
+    this.startTime =  input.value;
   }
 
   updateEndTime(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const localDate = new Date(input.value);
-    localDate.setHours(localDate.getHours());
-    this.endTime = localDate.toISOString();
+    this.endTime =  input.value;
   }
 
   updateRepeat(event: Event): void {

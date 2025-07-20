@@ -109,7 +109,6 @@ export class DeviceComponent {
         .DeactivateRoutine(this.device.id, routineId)
         .subscribe({
           next: () => {
-            this.ngOnInit();
           },
           error: (err) => {
             console.error('error ao desativar rotina:', err);
@@ -120,7 +119,6 @@ export class DeviceComponent {
         .ActivateRoutine(this.device.id, routineId)
         .subscribe({
           next: () => {
-            this.ngOnInit();
           },
           error: (err) => {
             console.error('error ao desativar rotina:', err);
